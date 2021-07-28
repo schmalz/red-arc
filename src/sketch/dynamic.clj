@@ -34,7 +34,7 @@
 
 (defn- stroke
   [colour]
-  (quil/stroke 1 79 (rand 100) (rand)#_(flatten (conj (colours colour) (rand)))))
+  (quil/stroke 1 (quil/random 50 100) (rand 100) (rand)#_(flatten (conj (colours colour) (rand)))))
 
 (defn- background
   [colour]
@@ -42,9 +42,15 @@
 
 (defn- arc
   []
-  (let [d (quil/random (* (quil/width)
-                          2))
-        j 5
+  (let [j 5
+        w (+ (quil/random (* (quil/width)
+                             2))
+             (quil/random (- j)
+                          j))
+        h (+ (quil/random (* (quil/height)
+                             2))
+             (quil/random (- j)
+                          j))
         x (quil/random (- j)
                        j)
         y (quil/random (- j)
@@ -52,8 +58,8 @@
     (stroke :red)
     (quil/arc x
               y
-              d
-              d
+              w
+              h
               (quil/random quil/TWO-PI)
               (quil/random quil/TWO-PI))))
 
@@ -72,7 +78,7 @@
   (quil/no-loop)
   (quil/no-fill)
   (background :black)
-  (arcs 101)
+  (arcs 999)
   (save-frame-to-disk))
 
 (defn initialise
